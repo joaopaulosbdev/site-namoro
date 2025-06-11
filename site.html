@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Amor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .romantic-bg {
+            background: linear-gradient(to bottom, #fff5f5, #ffebee);
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 105, 140, 0.8);
+        }
+        
+        .counter-item {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="romantic-bg min-h-screen pb-10">
+    <div class="container mx-auto px-4">
+        <!-- Header Section -->
+        <header class="text-center py-10">
+            <h1 class="cursive text-5xl md:text-6xl font-bold text-pink-600 glow mb-6 heartbeat">
+                Nossa jornada está apenas começando!
+            </h1>
+
+            <div class="flex justify-center my-6">
+                <img src="joya.jpg" 
+                     alt="Nossa foto de casal" 
+                     class="rounded-xl w-96 h-96 md:w-128 md:h-128 object-cover border-4 border-pink-200 shadow-lg">
+            </div>
+
+
+        </header>
+        
+        <!-- Counter Section -->
+        <section class="counter-section bg-white rounded-xl shadow-lg p-6 mb-12 max-w-3xl mx-auto">
+            <h3 class="cursive text-2xl md:text-3xl text-center text-pink-600 mb-6">
+                Nossa Jornada Juntos
+            </h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center counter-container">
+                <div class="counter-item bg-pink-50 rounded-lg p-4 border-b-4 border-pink-200">
+                    <div class="text-3xl md:text-4xl font-bold text-pink-600" id="years">00</div>
+                    <div class="text-sm text-pink-500 uppercase mt-1">Anos</div>
+                </div>
+                
+                <div class="counter-item bg-pink-50 rounded-lg p-4 border-b-4 border-pink-200">
+                    <div class="text-3xl md:text-4xl font-bold text-pink-600" id="months">00</div>
+                    <div class="text-sm text-pink-500 uppercase mt-1">Meses</div>
+                </div>
+                
+                <div class="counter-item bg-pink-50 rounded-lg p-4 border-b-4 border-pink-200">
+                    <div class="text-3xl md:text-4xl font-bold text-pink-600" id="days">00</div>
+                    <div class="text-sm text-pink-500 uppercase mt-1">Dias</div>
+                </div>
+                
+                <div class="counter-item bg-pink-50 rounded-lg p-4 border-b-4 border-pink-200">
+                    <div class="text-3xl md:text-4xl font-bold text-pink-600" id="hours">00</div>
+                    <div class="text-sm text-pink-500 uppercase mt-1">Horas</div>
+                </div>
+                
+                <div class="counter-item bg-pink-50 rounded-lg p-4 border-b-4 border-pink-200">
+                    <div class="text-3xl md:text-4xl font-bold text-pink-600" id="minutes">00</div>
+                    <div class="text-sm text-pink-500 uppercase mt-1">Minutos</div>
+                </div>
+                
+                <div class="counter-item bg-pink-50 rounded-lg p-4 border-b-4 border-pink-200">
+                    <div class="text-3xl md:text-4xl font-bold text-pink-600" id="seconds">00</div>
+                    <div class="text-sm text-pink-500 uppercase mt-1">Segundos</div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-6 text-pink-500">
+                Desde o dia 20 de ABril de 2025
+            </div>
+        </section>
+        
+        <!-- Music Section -->
+        <section class="music-section mb-12 max-w-3xl mx-auto">
+            <h3 class="cursive text-2xl md:text-3xl text-center text-pink-600 mb-6">
+                Nossa Música
+            </h3>
+            
+            <div class="aspect-w-16 aspect-h-9 bg-pink-100 rounded-xl overflow-hidden shadow-lg">
+               <iframe class="w-full h-64 md:h-96" width="1215" height="683" src="https://www.youtube.com/embed/hWadAXfH6Uc?autoplay=1&mute=1" title="Melim - Velha Infância (Tribalistas)" frameborder="0" 
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            
+            <p class="text-center mt-4 text-pink-500 italic">
+                "Não posso imaginar minha vida sem você."
+            </p>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-10">
+            <p class="text-pink-400 italic">
+                Feito com ❤️ de João Paulo para Khetily Yasmin
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Since we can't use moment.js (external library), we'll create our own date difference calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            // Our dating date: June 11, 2022
+            const datingDate = new Date('2025-04-20T18:30:00');
+            
+            function updateCounter() {
+                const now = new Date();
+                const diff = now - datingDate;
+                
+                // Calculate years, months, days, hours, minutes, seconds
+                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+                const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+                const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                // Update the DOM
+                document.getElementById('years').textContent = years.toString().padStart(2, '0');
+                document.getElementById('months').textContent = months.toString().padStart(2, '0');
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                
+                // Request animation frame keeps the counter smooth
+                requestAnimationFrame(updateCounter);
+            }
+            
+            // Start the counter
+            updateCounter();
+        });
+    </script>
+</body>
+</html>
