@@ -3,209 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosso Amor</title>
+<title>Kethily e João Paulo – 06.11.2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --brown: #7a5c3c;
-    --tan: #b08e6b;
-    --sand: #e8c39e;
-    --cream: #f5e1ce;
-    --white: #ffffff;
-    --glass: rgba(255, 255, 255, 0.38);
-    --glass-strong: rgba(255, 255, 255, 0.55);
-    --edge: rgba(255, 255, 255, 0.7);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    min-height: 100vh;
-    font-family: 'Manrope', system-ui, sans-serif;
-    color: var(--brown);
-    background: var(--cream);
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
+  :root { --brown:#7a5c3c; --tan:#b08e6b; --sand:#e8c39e; --cream:#f5e1ce; --white:#ffffff;
+    --glass:rgba(255,255,255,.38); --glass-strong:rgba(255,255,255,.55); --edge:rgba(255,255,255,.7); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { min-height:100vh; font-family:'Manrope',system-ui,sans-serif; color:var(--brown); background:var(--cream); overflow-x:hidden; line-height:1.6; }
 
-  /* Fundo: foto desfocada + manchas de cor para o vidro ter o que refratar */
-  .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
-  .bg::before {
-    content: ""; position: absolute; inset: -60px;
-    background: url('joya.jpg') center / cover no-repeat;
-    filter: blur(50px) saturate(1.1);
-    opacity: .55;
-  }
-  .blob { position: absolute; border-radius: 50%; filter: blur(70px); }
-  .b1 { width: 480px; height: 480px; background: var(--sand); top: -120px; left: -100px; opacity: .9; }
-  .b2 { width: 420px; height: 420px; background: var(--tan); bottom: -120px; right: -80px; opacity: .55; animation: drift 22s ease-in-out infinite alternate; }
-  .b3 { width: 320px; height: 320px; background: var(--white); top: 40%; left: 55%; opacity: .7; }
-  @keyframes drift { to { transform: translate(-60px, -50px) scale(1.12); } }
+  .bg { position:fixed; inset:0; z-index:-1; overflow:hidden; }
+  .bg::before { content:""; position:absolute; inset:-60px; background:url('joya.jpg') center/cover no-repeat; filter:blur(50px) saturate(1.1); opacity:.55; }
+  .blob { position:absolute; border-radius:50%; filter:blur(70px); }
+  .b1 { width:480px; height:480px; background:var(--sand); top:-120px; left:-100px; opacity:.9; }
+  .b2 { width:420px; height:420px; background:var(--tan); bottom:-120px; right:-80px; opacity:.55; animation:drift 22s ease-in-out infinite alternate; }
+  .b3 { width:320px; height:320px; background:var(--white); top:40%; left:55%; opacity:.7; }
+  @keyframes drift { to { transform:translate(-60px,-50px) scale(1.12); } }
 
-  .glass {
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid var(--edge);
-    border-radius: 28px;
-    box-shadow: 0 14px 44px rgba(122, 92, 60, .18), inset 0 1px 0 rgba(255, 255, 255, .8);
-  }
+  .glass { background:var(--glass); -webkit-backdrop-filter:blur(20px) saturate(150%); backdrop-filter:blur(20px) saturate(150%);
+    border:1px solid var(--edge); border-radius:28px; box-shadow:0 14px 44px rgba(122,92,60,.18), inset 0 1px 0 rgba(255,255,255,.8); }
+  main { max-width:880px; margin:0 auto; padding:40px 20px 56px; display:grid; gap:28px; }
+  section, header { padding:32px 24px; text-align:center; }
 
-  main { max-width: 880px; margin: 0 auto; padding: 40px 20px 56px; display: grid; gap: 28px; }
+  h1 { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(2.5rem,7.5vw,4.4rem); line-height:1.04; letter-spacing:-.01em; max-width:15ch; margin:0 auto 12px; }
+  h2 { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(1.7rem,4vw,2.2rem); margin-bottom:20px; }
+  .names { font-size:1.05rem; margin-bottom:28px; }
+  .photo { width:min(340px,80%); aspect-ratio:4/5; margin:0 auto; padding:10px; border-radius:999px 999px 28px 28px; background:var(--glass-strong); border:1px solid var(--edge); box-shadow:0 18px 50px rgba(122,92,60,.25); }
+  .photo img { width:100%; height:100%; object-fit:cover; display:block; border-radius:999px 999px 20px 20px; background:var(--sand); }
 
-  /* Hero */
-  .hero { padding: 44px 28px 36px; text-align: center; }
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(2.4rem, 7vw, 4.2rem);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    max-width: 14ch;
-    margin: 0 auto 28px;
-  }
-  .photo {
-    width: min(340px, 80%);
-    aspect-ratio: 4 / 5;
-    margin: 0 auto;
-    padding: 10px;
-    border-radius: 999px 999px 28px 28px;
-    background: var(--glass-strong);
-    border: 1px solid var(--edge);
-    box-shadow: 0 18px 50px rgba(122, 92, 60, .25);
-  }
-  .photo img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    border-radius: 999px 999px 20px 20px;
-    background: var(--sand);
-  }
+  .grid { display:grid; gap:12px; }
+  .g4 { grid-template-columns:repeat(2,1fr); } .g6 { grid-template-columns:repeat(3,1fr); }
+  @media (min-width:640px) { .g4 { grid-template-columns:repeat(4,1fr); } .g6 { grid-template-columns:repeat(6,1fr); } }
+  .tile { padding:16px 6px 12px; border-radius:20px; background:var(--glass-strong); border:1px solid var(--edge); box-shadow:inset 0 1px 0 rgba(255,255,255,.8); }
+  .tile b { display:block; font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(2rem,6vw,2.7rem); line-height:1; font-variant-numeric:tabular-nums; }
+  .tile span { display:block; margin-top:6px; font-size:.85rem; color:var(--tan); font-weight:600; }
 
-  /* Contador */
-  .counter { padding: 32px 24px; text-align: center; }
-  h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(1.7rem, 4vw, 2.2rem);
-    margin-bottom: 22px;
-  }
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  @media (min-width: 640px) { .grid { grid-template-columns: repeat(6, 1fr); } }
-  .tile {
-    padding: 16px 6px 12px;
-    border-radius: 20px;
-    background: var(--glass-strong);
-    border: 1px solid var(--edge);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
-  }
-  .tile b {
-    display: block;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 6vw, 2.7rem);
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .tile span { display: block; margin-top: 6px; font-size: .85rem; color: var(--tan); font-weight: 600; }
-  .since { margin-top: 20px; font-size: .95rem; }
+  /* Casamento: o elemento principal da página */
+  .wedding { background:linear-gradient(160deg,rgba(255,255,255,.62),rgba(232,195,158,.42)); padding:40px 24px; }
+  .wedding .tile b { font-size:clamp(2.4rem,8vw,3.8rem); }
+  .wedding .tile { background:rgba(255,255,255,.65); }
+  .bar { height:10px; border-radius:99px; background:rgba(255,255,255,.7); margin:26px auto 8px; max-width:520px; overflow:hidden; border:1px solid var(--edge); }
+  .bar i { display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,var(--tan),var(--brown)); transition:width 1s; }
+  .small { font-size:.9rem; }
+  .actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:22px; }
+  .btn { padding:11px 20px; border-radius:999px; border:1px solid var(--edge); background:var(--brown); color:var(--white); font:inherit; font-weight:600; font-size:.92rem; cursor:pointer; text-decoration:none; }
+  .btn.ghost { background:rgba(255,255,255,.65); color:var(--brown); }
 
-  /* Música */
-  .music { padding: 32px 24px 28px; text-align: center; }
-  .video {
-    border-radius: 20px; overflow: hidden;
-    border: 1px solid var(--edge);
-    box-shadow: 0 10px 30px rgba(122, 92, 60, .22);
-    aspect-ratio: 16 / 9;
-    background: var(--sand);
-  }
-  .video iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.35rem;
-    margin-top: 20px;
-  }
+  .stat b { font-size:clamp(1.7rem,5vw,2.3rem); }
 
-  footer { text-align: center; font-size: .95rem; padding-bottom: 8px; }
-  footer .heart { display: inline-block; animation: beat 1.6s ease-in-out infinite; }
-  @keyframes beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } }
+  /* Linha do tempo (é uma sequência de verdade) */
+  .timeline { list-style:none; text-align:left; max-width:520px; margin:0 auto; padding-left:26px; border-left:2px solid var(--tan); }
+  .timeline li { position:relative; padding:0 0 24px 18px; }
+  .timeline li:last-child { padding-bottom:0; }
+  .timeline li::before { content:""; position:absolute; left:-35px; top:6px; width:16px; height:16px; border-radius:50%; background:var(--cream); border:3px solid var(--brown); }
+  .timeline time { display:block; font-size:.85rem; color:var(--tan); font-weight:600; }
+  .timeline strong { font-family:'Cormorant Garamond',serif; font-size:1.35rem; }
 
-  :focus-visible { outline: 3px solid var(--brown); outline-offset: 3px; }
-  @media (prefers-reduced-motion: reduce) {
-    .b2, footer .heart { animation: none; }
-    html { scroll-behavior: auto; }
-  }
-  /* Sem suporte a vidro: fundo sólido legível */
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .glass { background: rgba(255, 255, 255, .8); }
-  }
+  .reason { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.35rem,3.5vw,1.8rem); min-height:4.2em; display:grid; place-items:center; max-width:30ch; margin:0 auto; }
+
+  .video { border-radius:20px; overflow:hidden; border:1px solid var(--edge); box-shadow:0 10px 30px rgba(122,92,60,.22); aspect-ratio:16/9; background:var(--sand); }
+  .video iframe { width:100%; height:100%; border:0; display:block; }
+  .quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.35rem; margin-top:20px; }
+  footer { text-align:center; font-size:.95rem; }
+  footer .heart { display:inline-block; animation:beat 1.6s ease-in-out infinite; }
+  @keyframes beat { 0%,100%{transform:scale(1)} 15%{transform:scale(1.25)} 30%{transform:scale(1)} 45%{transform:scale(1.2)} }
+  :focus-visible { outline:3px solid var(--brown); outline-offset:3px; }
+  @media (prefers-reduced-motion:reduce) { .b2, footer .heart { animation:none; } html { scroll-behavior:auto; } .bar i { transition:none; } }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .glass { background:rgba(255,255,255,.8); } }
 </style>
 </head>
 <body>
-  <div class="bg" aria-hidden="true">
-    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-  </div>
+<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 
-  <main>
-    <header class="glass hero">
-      <h1>Nossa jornada está apenas começando!</h1>
-      <div class="photo">
-        <img src="joya.jpg" alt="Nossa foto de casal">
-      </div>
-    </header>
+<main>
+  <header class="glass">
+    <h1>Do primeiro oi ao sim para sempre</h1>
+    <p class="names">Kethily e João Paulo, 6 de novembro de 2026</p>
+    <div class="photo"><img id="photo" src="joya.jpg" alt="Nossa foto de casal"></div>
+  </header>
 
-    <section class="glass counter" aria-labelledby="t-contador">
-      <h2 id="t-contador">Nossa jornada juntos</h2>
-      <div class="grid" role="timer" aria-live="off">
-        <div class="tile"><b id="years">00</b><span>Anos</span></div>
-        <div class="tile"><b id="months">00</b><span>Meses</span></div>
-        <div class="tile"><b id="days">00</b><span>Dias</span></div>
-        <div class="tile"><b id="hours">00</b><span>Horas</span></div>
-        <div class="tile"><b id="minutes">00</b><span>Minutos</span></div>
-        <div class="tile"><b id="seconds">00</b><span>Segundos</span></div>
-      </div>
-      <p class="since">Desde o dia 20 de abril de 2025</p>
-    </section>
+  <section class="glass wedding" aria-labelledby="t-wed">
+    <h2 id="t-wed">Faltam para o nosso casamento</h2>
+    <div class="grid g4" role="timer" aria-live="off">
+      <div class="tile"><b id="w-d">00</b><span id="w-dl">Dias</span></div>
+      <div class="tile"><b id="w-h">00</b><span>Horas</span></div>
+      <div class="tile"><b id="w-m">00</b><span>Minutos</span></div>
+      <div class="tile"><b id="w-s">00</b><span>Segundos</span></div>
+    </div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="bar"><i id="bar-fill"></i></div>
+    <p class="small" id="bar-text"></p>
+    <div class="actions">
+      <button class="btn" id="btn-ics">Salvar a data no calendário</button>
+      <a class="btn ghost" id="btn-wa" href="#" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+    </div>
+  </section>
 
-    <section class="glass music" aria-labelledby="t-musica">
-      <h2 id="t-musica">Nossa música</h2>
-      <div class="video">
-        <iframe src="https://www.youtube.com/embed/hWadAXfH6Uc?autoplay=1&mute=1"
-                title="Melim - Velha Infância (Tribalistas)"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-      <p class="quote">“Não posso imaginar minha vida sem você.”</p>
-    </section>
+  <section class="glass" aria-labelledby="t-juntos">
+    <h2 id="t-juntos">Nossa história até aqui</h2>
+    <div class="grid g6" role="timer" aria-live="off">
+      <div class="tile"><b id="years">00</b><span>Anos</span></div>
+      <div class="tile"><b id="months">00</b><span>Meses</span></div>
+      <div class="tile"><b id="days">00</b><span>Dias</span></div>
+      <div class="tile"><b id="hours">00</b><span>Horas</span></div>
+      <div class="tile"><b id="minutes">00</b><span>Minutos</span></div>
+      <div class="tile"><b id="seconds">00</b><span>Segundos</span></div>
+    </div>
+    <p class="small" style="margin-top:20px">Juntos desde 20 de abril de 2025</p>
+  </section>
 
-    <footer>
-      Feito com <span class="heart">🤎</span> de João Paulo para Kethily Yasmin
-    </footer>
-  </main>
+  <section class="glass" aria-labelledby="t-numeros">
+    <h2 id="t-numeros">Nós em números</h2>
+    <div class="grid g4">
+      <div class="tile stat"><b id="st-dias">0</b><span>dias juntos</span></div>
+      <div class="tile stat"><b id="st-sem">0</b><span>semanas juntos</span></div>
+      <div class="tile stat"><b id="st-lua">0</b><span>luas novas a dois</span></div>
+      <div class="tile stat"><b id="st-bat">0</b><span>batimentos do coração*</span></div>
+    </div>
+    <p class="small" style="margin-top:16px">*Estimativa a 70 batimentos por minuto.</p>
+  </section>
 
+  <section class="glass" aria-labelledby="t-tempo">
+    <h2 id="t-tempo">Nosso caminho</h2>
+    <ul class="timeline" id="timeline"></ul>
+  </section>
+
+  <section class="glass" aria-labelledby="t-razoes">
+    <h2 id="t-razoes">Razões para te amar</h2>
+    <p class="reason" id="reason" aria-live="polite">Toque no botão para ler uma.</p>
+    <div class="actions"><button class="btn" id="btn-reason">Mais uma razão</button></div>
+  </section>
+
+  <section class="glass" aria-labelledby="t-musica">
+    <h2 id="t-musica">Nossa música</h2>
+    <div class="video">
+      <iframe id="video" title="Melim - Velha Infância (Tribalistas)"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="quote">“Não posso imaginar minha vida sem você.”</p>
+  </section>
+
+  <footer>Feito com <span class="heart">🤎</span> de João Paulo para Kethily Yasmin</footer>
+</main>
+
+<script src="firebase-config.js"></script>
+<script type="module">
+  // Carrega foto e vídeo salvos no painel admin (se o Firebase estiver configurado)
+  const cfg = window.FIREBASE_CONFIG;
+  let videoId = 'hWadAXfH6Uc';
+  if (cfg && cfg.apiKey && !cfg.apiKey.startsWith('COLE')) {
+    try {
+      const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+      const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+      const snap = await getDoc(doc(getFirestore(initializeApp(cfg)), 'site', 'config'));
+      if (snap.exists()) {
+        const d = snap.data();
+        if (d.photo) document.getElementById('photo').src = d.photo;
+        if (d.videoId) videoId = d.videoId;
+      }
+    } catch (e) { console.warn('Config não carregada:', e); }
+  }
+  document.getElementById('video').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+</script>
 <script>
-  const start = new Date('2025-04-20T18:30:00');
+  // ===== Edite aqui =====
+  const START   = new Date('2025-04-20T18:30:00');   // início do namoro
+  const WEDDING = new Date('2026-11-06T00:00:00');   // casamento (ajuste a hora da cerimônia se quiser)
+  const REASONS = [
+    'Porque com você até um dia comum vira especial.',
+    'Porque a gente ri das mesmas coisas.',
+    'Porque do seu lado tudo parece possível.',
+    'Porque você é o meu lugar de descanso.',
+    'Porque eu escolheria cada dia com você de novo.',
+    'Porque você me faz querer ser melhor.'
+  ];
+  // ======================
+
+  const $ = id => document.getElementById(id);
   const pad = n => String(n).padStart(2, '0');
+  const fmt = n => n.toLocaleString('pt-BR');
   const addMonths = (d, m) => new Date(d.getFullYear(), d.getMonth() + m, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds());
-  const el = id => document.getElementById(id);
+  const DAY = 864e5;
 
   function update() {
     const now = new Date();
-    // Diferença de calendário: meses inteiros primeiro, depois o restante em dias/horas/min/seg
-    let totalMonths = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
-    let anchor = addMonths(start, totalMonths);
-    if (anchor > now) { totalMonths--; anchor = addMonths(start, totalMonths); }
-    const ms = Math.max(0, now - anchor);
 
-    el('years').textContent   = pad(Math.floor(totalMonths / 12));
-    el('months').textContent  = pad(totalMonths % 12);
-    el('days').textContent    = pad(Math.floor(ms / 864e5));
-    el('hours').textContent   = pad(Math.floor(ms % 864e5 / 36e5));
-    el('minutes').textContent = pad(Math.floor(ms % 36e5 / 6e4));
-    el('seconds').textContent = pad(Math.floor(ms % 6e4 / 1e3));
+    // Juntos: meses de calendário + resto
+    let tm = (now.getFullYear() - START.getFullYear()) * 12 + now.getMonth() - START.getMonth();
+    let anchor = addMonths(START, tm);
+    if (anchor > now) { tm--; anchor = addMonths(START, tm); }
+    const ms = Math.max(0, now - anchor);
+    $('years').textContent = pad(Math.floor(tm / 12));
+    $('months').textContent = pad(tm % 12);
+    $('days').textContent = pad(Math.floor(ms / DAY));
+    $('hours').textContent = pad(Math.floor(ms % DAY / 36e5));
+    $('minutes').textContent = pad(Math.floor(ms % 36e5 / 6e4));
+    $('seconds').textContent = pad(Math.floor(ms % 6e4 / 1e3));
+
+    // Casamento: regressivo; no dia, comemora; depois, vira "casados há"
+    const diff = WEDDING - now, abs = Math.abs(diff);
+    const title = $('t-wed');
+    if (diff <= 0 && abs < DAY) title.textContent = 'Hoje é o grande dia! 🤍';
+    else title.textContent = diff > 0 ? 'Faltam para o nosso casamento' : 'Casados há';
+    $('w-d').textContent = pad(Math.floor(abs / DAY));
+    $('w-h').textContent = pad(Math.floor(abs % DAY / 36e5));
+    $('w-m').textContent = pad(Math.floor(abs % 36e5 / 6e4));
+    $('w-s').textContent = pad(Math.floor(abs % 6e4 / 1e3));
+
+    const pct = Math.min(100, Math.max(0, (now - START) / (WEDDING - START) * 100));
+    $('bar-fill').style.width = pct + '%';
+    $('bar').setAttribute('aria-valuenow', pct.toFixed(0));
+    $('bar-text').textContent = pct >= 100 ? 'Chegamos ao altar.' : pct.toFixed(1).replace('.', ',') + '% do caminho até o altar';
+
+    // Números
+    const juntos = Math.max(0, now - START);
+    $('st-dias').textContent = fmt(Math.floor(juntos / DAY));
+    $('st-sem').textContent = fmt(Math.floor(juntos / (7 * DAY)));
+    $('st-lua').textContent = fmt(Math.floor(juntos / (29.530588 * DAY)));
+    $('st-bat').textContent = fmt(Math.floor(juntos / 6e4 * 70));
   }
-  update();
-  setInterval(update, 1000);
+  update(); setInterval(update, 1000);
+
+  // Linha do tempo
+  const long = d => d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+  const dias = Math.floor((Date.now() - START) / DAY);
+  const marcos = [
+    { d: long(START), t: 'Começou o nosso namoro', s: 'O primeiro dia de tudo.' },
+    { d: 'Hoje', t: dias + ' dias juntos', s: 'E cada um valeu a pena.' },
+    { d: long(WEDDING), t: 'O nosso casamento', s: 'O começo da nossa família.' }
+    // Para adicionar um marco: { d: 'data', t: 'título', s: 'frase' } — mantenha a ordem do tempo.
+  ];
+  $('timeline').innerHTML = marcos.map(m => `<li><time>${m.d}</time><strong>${m.t}</strong><br><span class="small">${m.s}</span></li>`).join('');
+
+  // Razões
+  let last = -1;
+  $('btn-reason').onclick = () => {
+    let i; do { i = Math.floor(Math.random() * REASONS.length); } while (i === last && REASONS.length > 1);
+    last = i; $('reason').textContent = REASONS[i];
+  };
+
+  // Calendário (.ics, dia inteiro)
+  $('btn-ics').onclick = () => {
+    const ymd = d => d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate());
+    const end = new Date(WEDDING.getTime() + DAY);
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Nosso Amor//PT', 'BEGIN:VEVENT',
+      'UID:casamento-' + ymd(WEDDING) + '@nosso-amor', 'DTSTAMP:' + ymd(new Date()) + 'T000000Z',
+      'DTSTART;VALUE=DATE:' + ymd(WEDDING), 'DTEND;VALUE=DATE:' + ymd(end),
+      'SUMMARY:Casamento de Kethily e João Paulo', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+    a.download = 'casamento.ics'; a.click();
+  };
+
+  // WhatsApp
+  $('btn-wa').onclick = e => {
+    const dd = Math.max(0, Math.ceil((WEDDING - Date.now()) / DAY));
+    const txt = dd > 0 ? `Faltam ${dd} dias para o nosso casamento! 🤍 ` : 'Nosso casamento! 🤍 ';
+    e.currentTarget.href = 'https://wa.me/?text=' + encodeURIComponent(txt + location.href);
+  };
 </script>
 </body>
 </html>
