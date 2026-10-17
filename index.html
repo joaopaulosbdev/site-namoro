@@ -1,163 +1,211 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosso Amor</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        .cursive {
-            font-family: 'Dancing Script', cursive;
-        }
-        
-        .romantic-bg {
-            background: linear-gradient(to bottom, #fefdff, #f7efff);
-        }
-        
-        .glow {
-            text-shadow: 0 0 10px rgba(180, 123, 255, 0.8);
-        }
-        
-        .counter-item {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .heartbeat {
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-    </style>
-</head>
-<body class="romantic-bg min-h-screen pb-10">
-    <div class="container mx-auto px-4">
-        <!-- Header Section -->
-        <header class="text-center py-10">
-            <h1 class="cursive text-5xl md:text-6xl font-bold text-purple-700 glow mb-6 heartbeat">
-                Nossa jornada está apenas começando!
-            </h1>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosso Amor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #7a5c3c;
+    --tan: #b08e6b;
+    --sand: #e8c39e;
+    --cream: #f5e1ce;
+    --white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.38);
+    --glass-strong: rgba(255, 255, 255, 0.55);
+    --edge: rgba(255, 255, 255, 0.7);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    font-family: 'Manrope', system-ui, sans-serif;
+    color: var(--brown);
+    background: var(--cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
 
-            <div class="flex justify-center my-6">
-                <img src="joya.jpg" 
-                     alt="Nossa foto de casal" 
-                     class="rounded-xl w-96 h-96 md:w-128 md:h-128 object-cover border-4 border-purple-200 shadow-lg">
-            </div>
-        </header>
-        
-        <!-- Counter Section -->
-        <section class="counter-section bg-white rounded-xl shadow-lg p-6 mb-12 max-w-3xl mx-auto">
-            <h3 class="cursive text-2xl md:text-3xl text-center text-purple-700 mb-6">
-                Nossa Jornada Juntos
-            </h3>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center counter-container">
-                <div class="counter-item bg-purple-50 rounded-lg p-4 border-b-4 border-purple-200">
-                    <div class="text-3xl md:text-4xl font-bold text-purple-700" id="years">00</div>
-                    <div class="text-sm text-purple-500 uppercase mt-1">Anos</div>
-                </div>
-                
-                <div class="counter-item bg-purple-50 rounded-lg p-4 border-b-4 border-purple-200">
-                    <div class="text-3xl md:text-4xl font-bold text-purple-700" id="months">00</div>
-                    <div class="text-sm text-purple-500 uppercase mt-1">Meses</div>
-                </div>
-                
-                <div class="counter-item bg-purple-50 rounded-lg p-4 border-b-4 border-purple-200">
-                    <div class="text-3xl md:text-4xl font-bold text-purple-700" id="days">00</div>
-                    <div class="text-sm text-purple-500 uppercase mt-1">Dias</div>
-                </div>
-                
-                <div class="counter-item bg-purple-50 rounded-lg p-4 border-b-4 border-purple-200">
-                    <div class="text-3xl md:text-4xl font-bold text-purple-700" id="hours">00</div>
-                    <div class="text-sm text-purple-500 uppercase mt-1">Horas</div>
-                </div>
-                
-                <div class="counter-item bg-purple-50 rounded-lg p-4 border-b-4 border-purple-200">
-                    <div class="text-3xl md:text-4xl font-bold text-purple-700" id="minutes">00</div>
-                    <div class="text-sm text-purple-500 uppercase mt-1">Minutos</div>
-                </div>
-                
-                <div class="counter-item bg-purple-50 rounded-lg p-4 border-b-4 border-purple-200">
-                    <div class="text-3xl md:text-4xl font-bold text-purple-700" id="seconds">00</div>
-                    <div class="text-sm text-purple-500 uppercase mt-1">Segundos</div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-6 text-purple-500">
-                Desde o dia 20 de Abril de 2025
-            </div>
-        </section>
-        
-        <!-- Music Section -->
-        <section class="music-section mb-12 max-w-3xl mx-auto">
-            <h3 class="cursive text-2xl md:text-3xl text-center text-purple-700 mb-6">
-                Nossa Música
-            </h3>
-            
-            <div class="aspect-w-16 aspect-h-9 bg-pink-100 rounded-xl overflow-hidden shadow-lg">
-               <iframe class="w-full h-64 md:h-96" width="1215" height="683" src="https://www.youtube.com/embed/hWadAXfH6Uc?autoplay=1&mute=1" title="Melim - Velha Infância (Tribalistas)" frameborder="0" 
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            
-            <p class="text-center mt-4 text-purple-500 italic">
-                "Não posso imaginar minha vida sem você."
-            </p>
-        </section>
-        
-        <!-- Footer -->
-        <footer class="text-center mt-10">
-            <p class="text-purple-500 italic">
-                Feito com 💜 de João Paulo para Kethily Yasmin
-            </p>
-        </footer>
-    </div>
-    
-    <script>
-        // Since we can't use moment.js (external library), we'll create our own date difference calculator
-        document.addEventListener('DOMContentLoaded', function() {
-            // Our dating date: June 11, 2022
-            const datingDate = new Date('2025-04-20T18:30:00');
-            
-            function updateCounter() {
-                const now = new Date();
-                const diff = now - datingDate;
-                
-                // Calculate years, months, days, hours, minutes, seconds
-                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-                const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
-                const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                // Update the DOM
-                document.getElementById('years').textContent = years.toString().padStart(2, '0');
-                document.getElementById('months').textContent = months.toString().padStart(2, '0');
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-                
-                // Request animation frame keeps the counter smooth
-                requestAnimationFrame(updateCounter);
-            }
-            
-            // Start the counter
-            updateCounter();
-        });
-    </script>
+  /* Fundo: foto desfocada + manchas de cor para o vidro ter o que refratar */
+  .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+  .bg::before {
+    content: ""; position: absolute; inset: -60px;
+    background: url('joya.jpg') center / cover no-repeat;
+    filter: blur(50px) saturate(1.1);
+    opacity: .55;
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); }
+  .b1 { width: 480px; height: 480px; background: var(--sand); top: -120px; left: -100px; opacity: .9; }
+  .b2 { width: 420px; height: 420px; background: var(--tan); bottom: -120px; right: -80px; opacity: .55; animation: drift 22s ease-in-out infinite alternate; }
+  .b3 { width: 320px; height: 320px; background: var(--white); top: 40%; left: 55%; opacity: .7; }
+  @keyframes drift { to { transform: translate(-60px, -50px) scale(1.12); } }
+
+  .glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid var(--edge);
+    border-radius: 28px;
+    box-shadow: 0 14px 44px rgba(122, 92, 60, .18), inset 0 1px 0 rgba(255, 255, 255, .8);
+  }
+
+  main { max-width: 880px; margin: 0 auto; padding: 40px 20px 56px; display: grid; gap: 28px; }
+
+  /* Hero */
+  .hero { padding: 44px 28px 36px; text-align: center; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 14ch;
+    margin: 0 auto 28px;
+  }
+  .photo {
+    width: min(340px, 80%);
+    aspect-ratio: 4 / 5;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 999px 999px 28px 28px;
+    background: var(--glass-strong);
+    border: 1px solid var(--edge);
+    box-shadow: 0 18px 50px rgba(122, 92, 60, .25);
+  }
+  .photo img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    border-radius: 999px 999px 20px 20px;
+    background: var(--sand);
+  }
+
+  /* Contador */
+  .counter { padding: 32px 24px; text-align: center; }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
+    margin-bottom: 22px;
+  }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(6, 1fr); } }
+  .tile {
+    padding: 16px 6px 12px;
+    border-radius: 20px;
+    background: var(--glass-strong);
+    border: 1px solid var(--edge);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+  }
+  .tile b {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 6vw, 2.7rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .tile span { display: block; margin-top: 6px; font-size: .85rem; color: var(--tan); font-weight: 600; }
+  .since { margin-top: 20px; font-size: .95rem; }
+
+  /* Música */
+  .music { padding: 32px 24px 28px; text-align: center; }
+  .video {
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--edge);
+    box-shadow: 0 10px 30px rgba(122, 92, 60, .22);
+    aspect-ratio: 16 / 9;
+    background: var(--sand);
+  }
+  .video iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.35rem;
+    margin-top: 20px;
+  }
+
+  footer { text-align: center; font-size: .95rem; padding-bottom: 8px; }
+  footer .heart { display: inline-block; animation: beat 1.6s ease-in-out infinite; }
+  @keyframes beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } }
+
+  :focus-visible { outline: 3px solid var(--brown); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    .b2, footer .heart { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+  /* Sem suporte a vidro: fundo sólido legível */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass { background: rgba(255, 255, 255, .8); }
+  }
+</style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  </div>
+
+  <main>
+    <header class="glass hero">
+      <h1>Nossa jornada está apenas começando!</h1>
+      <div class="photo">
+        <img src="joya.jpg" alt="Nossa foto de casal">
+      </div>
+    </header>
+
+    <section class="glass counter" aria-labelledby="t-contador">
+      <h2 id="t-contador">Nossa jornada juntos</h2>
+      <div class="grid" role="timer" aria-live="off">
+        <div class="tile"><b id="years">00</b><span>Anos</span></div>
+        <div class="tile"><b id="months">00</b><span>Meses</span></div>
+        <div class="tile"><b id="days">00</b><span>Dias</span></div>
+        <div class="tile"><b id="hours">00</b><span>Horas</span></div>
+        <div class="tile"><b id="minutes">00</b><span>Minutos</span></div>
+        <div class="tile"><b id="seconds">00</b><span>Segundos</span></div>
+      </div>
+      <p class="since">Desde o dia 20 de abril de 2025</p>
+    </section>
+
+    <section class="glass music" aria-labelledby="t-musica">
+      <h2 id="t-musica">Nossa música</h2>
+      <div class="video">
+        <iframe src="https://www.youtube.com/embed/hWadAXfH6Uc?autoplay=1&mute=1"
+                title="Melim - Velha Infância (Tribalistas)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <p class="quote">“Não posso imaginar minha vida sem você.”</p>
+    </section>
+
+    <footer>
+      Feito com <span class="heart">🤎</span> de João Paulo para Kethily Yasmin
+    </footer>
+  </main>
+
+<script>
+  const start = new Date('2025-04-20T18:30:00');
+  const pad = n => String(n).padStart(2, '0');
+  const addMonths = (d, m) => new Date(d.getFullYear(), d.getMonth() + m, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds());
+  const el = id => document.getElementById(id);
+
+  function update() {
+    const now = new Date();
+    // Diferença de calendário: meses inteiros primeiro, depois o restante em dias/horas/min/seg
+    let totalMonths = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
+    let anchor = addMonths(start, totalMonths);
+    if (anchor > now) { totalMonths--; anchor = addMonths(start, totalMonths); }
+    const ms = Math.max(0, now - anchor);
+
+    el('years').textContent   = pad(Math.floor(totalMonths / 12));
+    el('months').textContent  = pad(totalMonths % 12);
+    el('days').textContent    = pad(Math.floor(ms / 864e5));
+    el('hours').textContent   = pad(Math.floor(ms % 864e5 / 36e5));
+    el('minutes').textContent = pad(Math.floor(ms % 36e5 / 6e4));
+    el('seconds').textContent = pad(Math.floor(ms % 6e4 / 1e3));
+  }
+  update();
+  setInterval(update, 1000);
+</script>
 </body>
 </html>
