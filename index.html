@@ -15,7 +15,7 @@
   body { min-height:100vh; font-family:'Manrope',system-ui,sans-serif; color:var(--brown); background:var(--cream); overflow-x:hidden; line-height:1.6; }
 
   .bg { position:fixed; inset:0; z-index:-1; overflow:hidden; }
-  .bg::before { content:""; position:absolute; inset:-60px; background:url('joya.jpg') center/cover no-repeat; filter:blur(50px) saturate(1.1); opacity:.55; }
+  .bg::before { content:""; position:absolute; inset:-60px; background:var(--bg-img, url('joya.jpg')) center/cover no-repeat; filter:blur(50px) saturate(1.1); opacity:.55; }
   .blob { position:absolute; border-radius:50%; filter:blur(70px); }
   .b1 { width:480px; height:480px; background:var(--sand); top:-120px; left:-100px; opacity:.9; }
   .b2 { width:420px; height:420px; background:var(--tan); bottom:-120px; right:-80px; opacity:.55; animation:drift 22s ease-in-out infinite alternate; }
@@ -24,7 +24,7 @@
 
   .glass { background:var(--glass); -webkit-backdrop-filter:blur(20px) saturate(150%); backdrop-filter:blur(20px) saturate(150%);
     border:1px solid var(--edge); border-radius:28px; box-shadow:0 14px 44px rgba(122,92,60,.18), inset 0 1px 0 rgba(255,255,255,.8); }
-  main { max-width:880px; margin:0 auto; padding:40px 20px 56px; display:grid; gap:28px; }
+  main { max-width:880px; margin:0 auto; padding:40px 20px 100px; display:grid; gap:28px; }
   section, header { padding:32px 24px; text-align:center; }
 
   h1 { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(2.5rem,7.5vw,4.4rem); line-height:1.04; letter-spacing:-.01em; max-width:15ch; margin:0 auto 12px; }
@@ -69,6 +69,13 @@
   footer { text-align:center; font-size:.95rem; }
   footer .heart { display:inline-block; animation:beat 1.6s ease-in-out infinite; }
   @keyframes beat { 0%,100%{transform:scale(1)} 15%{transform:scale(1.25)} 30%{transform:scale(1)} 45%{transform:scale(1.2)} }
+  /* Botão flutuante do painel admin */
+  .admin-fab { position:fixed; right:max(18px, env(safe-area-inset-right)); bottom:max(18px, env(safe-area-inset-bottom)); z-index:20;
+    display:inline-flex; align-items:center; gap:8px; padding:11px 16px; border-radius:999px; text-decoration:none; color:var(--brown); font-weight:600; font-size:.88rem;
+    background:var(--glass-strong); -webkit-backdrop-filter:blur(16px) saturate(150%); backdrop-filter:blur(16px) saturate(150%);
+    border:1px solid var(--edge); box-shadow:0 8px 28px rgba(122,92,60,.25), inset 0 1px 0 rgba(255,255,255,.8); transition:transform .2s, background .2s; }
+  .admin-fab:hover { background:rgba(255,255,255,.8); transform:translateY(-2px); }
+  .admin-fab svg { width:18px; height:18px; }
   :focus-visible { outline:3px solid var(--brown); outline-offset:3px; }
   @media (prefers-reduced-motion:reduce) { .b2, footer .heart { animation:none; } html { scroll-behavior:auto; } .bar i { transition:none; } }
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) { .glass { background:rgba(255,255,255,.8); } }
@@ -79,7 +86,7 @@
 
 <main>
   <header class="glass">
-    <h1>Do primeiro oi ao sim para sempre</h1>
+    <h1 id="title">Do primeiro oi ao sim para sempre</h1>
     <p class="names">Kethily e João Paulo, 6 de novembro de 2026</p>
     <div class="photo"><img id="photo" src="joya.jpg" alt="Nossa foto de casal"></div>
   </header>
@@ -148,24 +155,33 @@
   <footer>Feito com <span class="heart">🤎</span> de João Paulo para Kethily Yasmin</footer>
 </main>
 
+<a class="admin-fab" href="admin.html" aria-label="Entrar no painel admin">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+  Admin
+</a>
+
 <script src="firebase-config.js"></script>
 <script type="module">
-  // Carrega foto e vídeo salvos no painel admin (se o Firebase estiver configurado)
+  // Carrega título, foto, vídeo e eventos salvos no painel admin (se o Firebase estiver configurado)
   const cfg = window.FIREBASE_CONFIG;
-  let videoId = 'hWadAXfH6Uc';
+  const setVideo = id => document.getElementById('video').src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1`;
+  let videoDone = false;
   if (cfg && cfg.apiKey && !cfg.apiKey.startsWith('COLE')) {
     try {
       const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
-      const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
-      const snap = await getDoc(doc(getFirestore(initializeApp(cfg)), 'site', 'config'));
-      if (snap.exists()) {
-        const d = snap.data();
-        if (d.photo) document.getElementById('photo').src = d.photo;
-        if (d.videoId) videoId = d.videoId;
-      }
+      const { getFirestore, doc, getDoc, collection, getDocs } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+      const db = getFirestore(initializeApp(cfg));
+      const snap = await getDoc(doc(db, 'site', 'config'));
+      const d = snap.exists() ? snap.data() : {};
+      if (d.photo) { document.getElementById('photo').src = d.photo; document.documentElement.style.setProperty('--bg-img', `url("${d.photo}")`); }
+      if (d.title) { document.getElementById('title').textContent = d.title; document.title = d.title; }
+      setVideo(d.videoId || 'hWadAXfH6Uc'); videoDone = true;
+      const ev = await getDocs(collection(db, 'events'));
+      window.EVENTS = ev.docs.map(x => x.data());
+      if (window.renderTimeline) window.renderTimeline();
     } catch (e) { console.warn('Config não carregada:', e); }
   }
-  document.getElementById('video').src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+  if (!videoDone) setVideo('hWadAXfH6Uc');
 </script>
 <script>
   // ===== Edite aqui =====
@@ -226,16 +242,24 @@
   }
   update(); setInterval(update, 1000);
 
-  // Linha do tempo
+  // Linha do tempo: marcos fixos + eventos cadastrados no painel, em ordem cronológica
   const long = d => d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
-  const dias = Math.floor((Date.now() - START) / DAY);
-  const marcos = [
-    { d: long(START), t: 'Começou o nosso namoro', s: 'O primeiro dia de tudo.' },
-    { d: 'Hoje', t: dias + ' dias juntos', s: 'E cada um valeu a pena.' },
-    { d: long(WEDDING), t: 'O nosso casamento', s: 'O começo da nossa família.' }
-    // Para adicionar um marco: { d: 'data', t: 'título', s: 'frase' } — mantenha a ordem do tempo.
-  ];
-  $('timeline').innerHTML = marcos.map(m => `<li><time>${m.d}</time><strong>${m.t}</strong><br><span class="small">${m.s}</span></li>`).join('');
+  const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  window.EVENTS = [];
+  window.renderTimeline = () => {
+    const now = Date.now(), dias = Math.floor((now - START) / DAY);
+    const items = [
+      { ts: +START, d: long(START), t: 'Começou o nosso namoro', s: 'O primeiro dia de tudo.' },
+      { ts: now, d: 'Hoje', t: dias + ' dias juntos', s: 'E cada um valeu a pena.' },
+      { ts: +WEDDING, d: long(WEDDING), t: 'O nosso casamento', s: 'O começo da nossa família.' },
+      ...window.EVENTS.filter(e => e.date && e.title).map(e => {
+        const dt = new Date(e.date + 'T12:00:00');
+        return { ts: +dt, d: long(dt), t: e.title, s: e.text };
+      })
+    ].sort((a, b) => a.ts - b.ts);
+    $('timeline').innerHTML = items.map(m => `<li><time>${esc(m.d)}</time><strong>${esc(m.t)}</strong>${m.s ? `<br><span class="small">${esc(m.s)}</span>` : ''}</li>`).join('');
+  };
+  renderTimeline();
 
   // Razões
   let last = -1;

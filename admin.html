@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Painel admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --brown:#7a5c3c; --tan:#b08e6b; --sand:#e8c39e; --cream:#f5e1ce; --white:#fff; --edge:rgba(255,255,255,.7); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { min-height:100vh; font-family:'Manrope',system-ui,sans-serif; color:var(--brown); background:var(--cream); padding:24px 16px 48px; line-height:1.5; }
+  .bg { position:fixed; inset:0; z-index:-1; overflow:hidden; }
+  .blob { position:absolute; border-radius:50%; filter:blur(70px); }
+  .b1 { width:420px; height:420px; background:var(--sand); top:-100px; left:-80px; }
+  .b2 { width:380px; height:380px; background:var(--tan); bottom:-100px; right:-60px; opacity:.55; }
+  main { max-width:640px; margin:0 auto; display:grid; gap:20px; }
+  .glass { padding:28px 24px; border-radius:28px; background:rgba(255,255,255,.4); -webkit-backdrop-filter:blur(20px) saturate(150%); backdrop-filter:blur(20px) saturate(150%); border:1px solid var(--edge); box-shadow:0 14px 44px rgba(122,92,60,.18), inset 0 1px 0 rgba(255,255,255,.8); }
+  h1, h2 { font-family:'Cormorant Garamond',serif; font-weight:600; }
+  h1 { font-size:2rem; } h2 { font-size:1.5rem; margin-bottom:4px; }
+  .sub { font-size:.92rem; margin-bottom:6px; }
+  label { display:block; font-weight:600; font-size:.9rem; margin:16px 0 6px; }
+  input, textarea { width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--edge); background:rgba(255,255,255,.7); color:var(--brown); font:inherit; }
+  textarea { resize:vertical; min-height:80px; }
+  .preview { margin-top:12px; width:130px; aspect-ratio:4/5; object-fit:cover; border-radius:16px; border:1px solid var(--edge); background:var(--sand); display:block; }
+  .btn { display:inline-block; margin-top:20px; padding:11px 20px; border-radius:999px; border:1px solid var(--edge); background:var(--brown); color:var(--white); font:inherit; font-weight:600; font-size:.92rem; cursor:pointer; text-decoration:none; }
+  .btn.ghost { background:rgba(255,255,255,.65); color:var(--brown); }
+  .btn.small { margin:0; padding:7px 14px; font-size:.85rem; }
+  .btn:disabled { opacity:.6; cursor:wait; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; }
+  .events { list-style:none; margin-top:20px; display:grid; gap:10px; }
+  .events li { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px 14px; border-radius:16px; background:rgba(255,255,255,.6); border:1px solid var(--edge); }
+  .events small { color:var(--tan); font-weight:600; display:block; }
+  #msg { text-align:center; font-size:.92rem; min-height:1.4em; }
+  .hidden { display:none !important; }
+  :focus-visible { outline:3px solid var(--brown); outline-offset:3px; }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div></div>
+<main>
+  <div class="glass" id="login">
+    <h1>Painel admin</h1>
+    <p class="sub">Entre com a conta Google do administrador.</p>
+    <button class="btn" id="btn-login">Entrar com Google</button>
+  </div>
+
+  <div id="panel" class="hidden" style="display:grid;gap:20px">
+    <div class="glass">
+      <h1>Painel admin</h1>
+      <p class="sub" id="who"></p>
+      <div class="row"><a class="btn ghost small" href="index.html" target="_blank">Ver página</a><button class="btn ghost small" id="btn-logout">Sair</button></div>
+    </div>
+
+    <section class="glass">
+      <h2>Aparência</h2>
+      <label for="title">Título do site</label>
+      <input id="title" maxlength="80" placeholder="Do primeiro oi ao sim para sempre">
+      <label for="file">Foto principal</label>
+      <input type="file" id="file" accept="image/*">
+      <img id="preview" class="preview" alt="Prévia da foto">
+      <label for="video">Link do vídeo no YouTube</label>
+      <input type="url" id="video" placeholder="https://www.youtube.com/watch?v=...">
+      <button class="btn" id="btn-save">Salvar aparência</button>
+    </section>
+
+    <section class="glass">
+      <h2>Nosso caminho</h2>
+      <p class="sub">Registre os momentos que aparecem na linha do tempo.</p>
+      <label for="ev-date">Data</label><input type="date" id="ev-date">
+      <label for="ev-title">Título</label><input id="ev-title" maxlength="80" placeholder="Primeiro encontro">
+      <label for="ev-text">Frase (opcional)</label><textarea id="ev-text" maxlength="200" placeholder="Um parágrafo curto sobre esse dia"></textarea>
+      <div class="row"><button class="btn" id="btn-ev">Adicionar evento</button><button class="btn ghost hidden" id="btn-cancel">Cancelar edição</button></div>
+      <ul class="events" id="events"></ul>
+    </section>
+  </div>
+  <p id="msg" role="status"></p>
+</main>
+
+<script src="firebase-config.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const $ = id => document.getElementById(id);
+const msg = (t, err) => { $('msg').textContent = t; $('msg').style.color = err ? '#a33a2a' : ''; };
+const app = initializeApp(window.FIREBASE_CONFIG);
+const auth = getAuth(app), db = getFirestore(app);
+const cfgRef = doc(db, 'site', 'config'), evCol = collection(db, 'events');
+let newPhoto = null, editingId = null, events = [];
+
+const ytId = u => { const m = u.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : (/^[\w-]{11}$/.test(u) ? u : null); };
+const brDate = iso => iso.split('-').reverse().join('/');
+
+const shrink = file => new Promise((ok, fail) => {
+  const img = new Image();
+  img.onload = () => {
+    const s = Math.min(1, 1000 / Math.max(img.width, img.height));
+    const c = document.createElement('canvas');
+    c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    ok(c.toDataURL('image/jpeg', 0.82));
+  };
+  img.onerror = () => fail(new Error('Imagem inválida'));
+  img.src = URL.createObjectURL(file);
+});
+
+$('btn-login').onclick = () => signInWithPopup(auth, new GoogleAuthProvider()).catch(e => msg('Não foi possível entrar: ' + e.code, true));
+$('btn-logout').onclick = () => signOut(auth);
+
+onAuthStateChanged(auth, async user => {
+  const ok = user && user.email === window.ADMIN_EMAIL;
+  $('login').classList.toggle('hidden', !!ok);
+  $('panel').classList.toggle('hidden', !ok);
+  if (user && !ok) { msg('Essa conta não tem acesso ao painel.', true); signOut(auth); return; }
+  if (!ok) return;
+  msg('');
+  $('who').textContent = 'Conectado como ' + user.email;
+  try {
+    const snap = await getDoc(cfgRef), d = snap.exists() ? snap.data() : {};
+    $('preview').src = d.photo || 'joya.jpg';
+    $('title').value = d.title || '';
+    if (d.videoId) $('video').value = 'https://youtu.be/' + d.videoId;
+    await loadEvents();
+  } catch (e) { msg('Erro ao carregar: ' + e.code, true); }
+});
+
+$('file').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try { newPhoto = await shrink(f); $('preview').src = newPhoto; } catch (err) { msg(err.message, true); }
+};
+
+$('btn-save').onclick = async () => {
+  const data = {}, link = $('video').value.trim(), title = $('title').value.trim();
+  if (link) { const id = ytId(link); if (!id) return msg('Link do YouTube inválido.', true); data.videoId = id; }
+  if (title) data.title = title;
+  if (newPhoto) data.photo = newPhoto;
+  if (!Object.keys(data).length) return msg('Nada para salvar.');
+  $('btn-save').disabled = true;
+  try { await setDoc(cfgRef, data, { merge: true }); newPhoto = null; msg('Aparência salva! Atualize a página principal.'); }
+  catch (e) { msg('Erro ao salvar: ' + e.code, true); }
+  $('btn-save').disabled = false;
+};
+
+// ----- Eventos -----
+async function loadEvents() {
+  const s = await getDocs(evCol);
+  events = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.date.localeCompare(b.date));
+  const ul = $('events'); ul.textContent = '';
+  if (!events.length) { ul.innerHTML = '<li>Nenhum evento ainda.</li>'; return; }
+  events.forEach(ev => {
+    const li = document.createElement('li');
+    const info = document.createElement('div');
+    const sm = document.createElement('small'); sm.textContent = brDate(ev.date);
+    const tt = document.createElement('span'); tt.textContent = ev.title;
+    info.append(sm, tt);
+    const act = document.createElement('div'); act.className = 'row';
+    const be = document.createElement('button'); be.className = 'btn ghost small'; be.textContent = 'Editar';
+    const bd = document.createElement('button'); bd.className = 'btn small'; bd.textContent = 'Excluir';
+    be.onclick = () => startEdit(ev);
+    bd.onclick = async () => {
+      if (!confirm('Excluir "' + ev.title + '"?')) return;
+      try { await deleteDoc(doc(db, 'events', ev.id)); await loadEvents(); msg('Evento excluído.'); }
+      catch (e) { msg('Erro ao excluir: ' + e.code, true); }
+    };
+    act.append(be, bd); li.append(info, act); ul.append(li);
+  });
+}
+function startEdit(ev) {
+  editingId = ev.id;
+  $('ev-date').value = ev.date; $('ev-title').value = ev.title; $('ev-text').value = ev.text || '';
+  $('btn-ev').textContent = 'Salvar alterações'; $('btn-cancel').classList.remove('hidden');
+  $('ev-title').focus();
+}
+function resetForm() {
+  editingId = null; $('ev-date').value = $('ev-title').value = $('ev-text').value = '';
+  $('btn-ev').textContent = 'Adicionar evento'; $('btn-cancel').classList.add('hidden');
+}
+$('btn-cancel').onclick = resetForm;
+$('btn-ev').onclick = async () => {
+  const data = { date: $('ev-date').value, title: $('ev-title').value.trim(), text: $('ev-text').value.trim() };
+  if (!data.date || !data.title) return msg('Preencha a data e o título.', true);
+  $('btn-ev').disabled = true;
+  try {
+    if (editingId) await setDoc(doc(db, 'events', editingId), data); else await addDoc(evCol, data);
+    resetForm(); await loadEvents(); msg('Evento salvo!');
+  } catch (e) { msg('Erro ao salvar: ' + e.code, true); }
+  $('btn-ev').disabled = false;
+};
+</script>
+</body>
+</html>
